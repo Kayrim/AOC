@@ -1,6 +1,6 @@
 // https://adventofcode.com/2022/day/1
 import fs from "fs";
-var text = fs.readFileSync('1\\inputa.txt', 'utf8');
+var text = fs.readFileSync('1\\input.txt', 'utf8');
 var textByLine = text.split("\r\n")
 
 let elves = new Map();
