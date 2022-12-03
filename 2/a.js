@@ -1,4 +1,4 @@
-// https://adventofcode.com/2022/day/1
+// https://adventofcode.com/2022/day/2
 import fs from 'fs'
 var text = fs.readFileSync('2\\input2.txt', 'utf8')
 var textByLine = text.split('\r\n').filter(Boolean)
