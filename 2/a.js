@@ -1,7 +1,7 @@
 // https://adventofcode.com/2022/day/2
 import fs from 'fs'
-var text = fs.readFileSync('2\\input.txt', 'utf8')
-var textByLine = text.split('\r\n').filter(Boolean)
+let text = fs.readFileSync('2\\input.txt', 'utf8')
+let textByLine = text.split('\r\n').filter(Boolean)
 
 let scores = {
     A: 1,
@@ -68,8 +68,8 @@ for(const line of textByLine){
 console.log("Part 1", score);
 
 
-var text2 = fs.readFileSync('2\\input2.txt', 'utf8')
-var textByLine2 = text2.split('\r\n').filter(Boolean)
+let text2 = fs.readFileSync('2\\input2.txt', 'utf8')
+let textByLine2 = text2.split('\r\n').filter(Boolean)
 
 // Part 2
 let score2 = 0

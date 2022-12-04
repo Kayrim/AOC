@@ -1,7 +1,7 @@
 // https://adventofcode.com/2022/day/3
 import fs from 'fs'
-var text1 = fs.readFileSync('3\\input.txt', 'utf8')
-var textByLine1 = text1.split('\r\n').filter(Boolean)
+let text1 = fs.readFileSync('3\\input.txt', 'utf8')
+let textByLine1 = text1.split('\r\n').filter(Boolean)
 // console.log(textByLine)
 // making a map of the scores for lookup
 let priority = new Map();
@@ -29,8 +29,8 @@ for(const line of textByLine1){
 console.log("Part 1",sumOfPriorities);
 
 // Part 2
-var text2 = fs.readFileSync('3\\input2.txt', 'utf8')
-var textByLine2 = text2.split('\r\n').filter(Boolean)
+let text2 = fs.readFileSync('3\\input2.txt', 'utf8')
+let textByLine2 = text2.split('\r\n').filter(Boolean)
 let sumOfPriorities2 = 0;
 
 // split into groups of 3
