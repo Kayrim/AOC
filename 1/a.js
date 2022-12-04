@@ -23,7 +23,7 @@ let sorted = new Map([...elves.entries()].sort((a, b) => b[0] - a[0]));
 
 // Part 1 
 // get the first key
-let firstKey = sorted.keys().next().value;
+let firstKey = [...sorted.keys()][0];
 console.log("Part 1", firstKey);
 
 // Part 2
