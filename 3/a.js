@@ -1,7 +1,7 @@
 // https://adventofcode.com/2022/day/3
 import fs from 'fs'
-let text1 = fs.readFileSync('3\\input.txt', 'utf8')
-let textByLine1 = text1.split('\r\n').filter(Boolean)
+let text = fs.readFileSync('3\\input.txt', 'utf8')
+let textByLine = text.split('\r\n').filter(Boolean)
 // console.log(textByLine)
 // making a map of the scores for lookup
 let priority = new Map();
@@ -12,7 +12,7 @@ for(let i = 1; i <= 26; i++){
 
 // Part 1 
 let sumOfPriorities = 0;
-for(const line of textByLine1){
+for(const line of textByLine){
     let middle = Math.ceil(line.length / 2);
     let compartments = [];
     compartments.push(line.split('').splice(0, middle));
@@ -29,14 +29,12 @@ for(const line of textByLine1){
 console.log("Part 1",sumOfPriorities);
 
 // Part 2
-let text2 = fs.readFileSync('3\\input2.txt', 'utf8')
-let textByLine2 = text2.split('\r\n').filter(Boolean)
 let sumOfPriorities2 = 0;
 
 // split into groups of 3
 let groupsOfElves = [];
-for(let i = 0; i < textByLine2.length; i += 3){
-    groupsOfElves.push(textByLine2.slice(i, i + 3));
+for(let i = 0; i < textByLine.length; i += 3){
+    groupsOfElves.push(textByLine.slice(i, i + 3));
 }
 
 for(const group of groupsOfElves){

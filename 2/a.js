@@ -68,12 +68,9 @@ for(const line of textByLine){
 console.log("Part 1", score);
 
 
-let text2 = fs.readFileSync('2\\input2.txt', 'utf8')
-let textByLine2 = text2.split('\r\n').filter(Boolean)
-
 // Part 2
 let score2 = 0
-for(const line of textByLine2){
+for(const line of textByLine){
     let plays = line.split(' ');
     let weNeedTo = outcome[plays[1]];
     let playToMake = map[plays[0]][outcome[plays[1]]]
