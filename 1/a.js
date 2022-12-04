@@ -19,15 +19,14 @@ while (textByLine.length > 0) {
 }
 
 // order the map by key
-let sorted = new Map([...elves.entries()].sort((a, b) => a[0] - b[0]));
+let sorted = new Map([...elves.entries()].sort((a, b) => b[0] - a[0]));
 
 // Part 1 
-console.log("Part 1", [...sorted].slice(-1)[0][0]);
+// get the first key
+let firstKey = sorted.keys().next().value;
+console.log("Part 1", firstKey);
 
-// grap the last 3 
-let last3 = [...sorted].slice(-3);
-
-// add up the keys
-let total = last3.reduce((a, b) => a + b[0], 0);
-
-console.log("Part 2", total);
+// Part 2
+// grap the top 3 keys and sum them
+let top3 = [...sorted.keys()].slice(0, 3).reduce((a, b) => a + b, 0);
+console.log("Part 2", top3);
