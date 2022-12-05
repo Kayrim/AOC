@@ -1,4 +1,4 @@
-// https://adventofcode.com/2022/day/3
+// https://adventofcode.com/2022/day/4
 import fs from 'fs'
 
 let text = fs.readFileSync('4\\input.txt', 'utf8')
