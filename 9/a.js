@@ -29,10 +29,9 @@ let visited2 = new Set();
 // create an array of 10 x, y coordinates
 let knots = Array.from({length: 2}, () => [0, 0]);
 let knots2 = Array.from({length: 10}, () => [0, 0]);
-visited1.add(`${0},${0}`);
-visited2.add(`${0},${0}`);
 
 function doRopePhysics(instructions, visited, knots) {
+    visited.add(`${0},${0}`);
     for(let i = 0; i < instructions.length; i++) {
         let instruction = instructions[i];
         let direction = instruction[0];
