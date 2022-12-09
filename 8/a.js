@@ -1,3 +1,4 @@
+// https://adventofcode.com/2022/day/8
 import fs from 'fs';
 let text = fs.readFileSync('8\\input.txt', 'utf8');
 // let text = `30373

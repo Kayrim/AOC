@@ -36,8 +36,8 @@ for (let line of textByLine) {
     }
 }
 
-// console.log("Full Disk", root);
 calcSizes(root);
+console.log("Full Disk", root);
 console.log("Part 1", getTotalLessThan(root, 100000));
 let deleteSize = spaceNeeded - (totalSpace - root.get('$'));
 let sizeMap = new Map();
