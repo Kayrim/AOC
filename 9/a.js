@@ -1,6 +1,5 @@
 // https://adventofcode.com/2022/day/9
 import fs from 'fs'
-import { exit } from 'process';
 let text = fs.readFileSync('9\\input.txt', 'utf8')
 let test1 = `R 4
 U 4
@@ -148,6 +147,6 @@ function drawGrid(visited) {
 doRopePhysics(instructions, visited1, knots);
 doRopePhysics(instructions, visited2, knots2);
 console.log("Part 1", visited1.size);
-// drawGrid(visited1);
+drawGrid(visited1);
 console.log("Part 2", visited2.size);
-// drawGrid(visited2);
+drawGrid(visited2);
