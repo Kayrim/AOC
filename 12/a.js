@@ -1,6 +1,5 @@
 // https://adventofcode.com/2022/day/12
 import fs from 'fs'
-import { exit } from 'process'
 // let text = fs.readFileSync('12\\test.txt', 'utf8').trim()
 let text = fs.readFileSync('12\\input.txt', 'utf8').trim()
 
@@ -61,6 +60,7 @@ function findPath(grid, start, end, shortest = false) {
     if (found) {
     let current = end
     if(shortest) {
+        // This is the shortest path we visited, technically not the shortest path in every case
         while (current.level !== start.level ) {
             path.push(current)
             current = parent[`${current.x},${current.y},${current.level}`]
