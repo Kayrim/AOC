@@ -18,13 +18,13 @@ packets.forEach((packet, index) => {
 console.log(goodPackets);
 
 function myCompare(a, b){
-    if(Array.isArray(a) && !isNaN(b)){
+    if(Array.isArray(a) && typeof b === 'number'){
         b = [b];
-    }else if(Array.isArray(b) && !isNaN(a)){
+    }else if(Array.isArray(b) && typeof a === 'number'){
         a = [a];
     }
     // if a and b are both numbers 
-    if(!isNaN(a) && !isNaN(b)){
+    if(typeof a === 'number' && typeof b === 'number'){
         if(a < b){
             return 1;
         }else if(a > b){
@@ -36,7 +36,6 @@ function myCompare(a, b){
 
     // if there both arrays
     if(Array.isArray(a) && Array.isArray(b)){
-        let res;
         for(let i = 0; i < Math.min(a.length, b.length); i++){
             let res = myCompare(a[i], b[i]);
             if(res !== 0){
@@ -47,8 +46,9 @@ function myCompare(a, b){
         // if we get here, we have to check the length
         if(a.length < b.length){
             return 1;
-        }else if(a.length >= b.length){
+        }else if(a.length >b.length){
             return -1;
         }
+        return 0;
     }
 }
