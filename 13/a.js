@@ -7,7 +7,6 @@ let goodPackets = 0;
 
 packets.forEach((packet, index) => {
     let [left, right] = packet;
-
     // compare the two packets
     let result = myCompare(left, right);
     if(result === 1){
@@ -15,7 +14,18 @@ packets.forEach((packet, index) => {
     }
 });
 
-console.log(goodPackets);
+// Part 1
+console.log("Part 1", goodPackets);
+
+// Part 2
+let dividers = [[[2]],[[6]]];
+packets.push(dividers);
+// have to reverse the array because myCompare is backwards
+packets = packets.flat().sort(myCompare).reverse();
+// find the index of the packet we added, index starts at 1
+let res = packets.reduce((acc, packet, index) => 
+    dividers.includes(packet) ? acc * (index+1) : acc, 1);
+console.log("Part 2", res);
 
 function myCompare(a, b){
     if(Array.isArray(a) && typeof b === 'number'){
