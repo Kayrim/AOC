@@ -19,14 +19,14 @@ function createGrid (maxWidth, maxHeight) {
 let grid = createGrid(maxX - minX + 1, maxY + 3)
 grid[0][500 - minX] = '+'
 drawRocks(grid, lines)
-printGrid(grid, 500 - minX, 0)
-addFloor(grid)
+// printGrid(grid, 500 - minX, 0)
 let unitsOfSand = 0;
 let playSand = true;
-let xFactor = minX;
+let xGrew = minX;
 while(playSand){
-    animateSand(500 - xFactor, 0, true);
+    animateSand(500 - xGrew, 0, true);
 }
+// printGrid(grid, 500 - xGrew, 0)
 console.log("Part 1", unitsOfSand)
 // reset for part 2
 grid = createGrid(maxX - minX + 1, maxY + 3)
@@ -35,10 +35,11 @@ drawRocks(grid, lines)
 addFloor(grid)
 unitsOfSand = 0;
 playSand = true;
-xFactor = minX;
+xGrew = minX;
 while(playSand){
-    animateSand(500 - xFactor,0, false);
+    animateSand(500 - xGrew,0, false);
 }
+// printGrid(grid, 500 - xGrew, 0)
 console.log("Part 2", unitsOfSand)
 
 function printGrid (grid, x, y) {
@@ -90,7 +91,7 @@ function increaseGridX(grid){
         }
     }
     addFloor(newGrid);
-    xFactor -= 2;
+    xGrew -= 2;
     return newGrid;
 }
 
@@ -122,8 +123,10 @@ function animateSand(x, y, part1 = false){
             }else if(!isSolid(bottomRight) && isSolid(below) && isSolid(bottomLeft)){
                 x += 1;
             }else if(isSolid(bottomLeft) && isSolid(bottomRight) && isSolid(below)){
-                // place the sand
+                // place the sand 
+                
                 if(grid[y][x] === '+'){
+                    //could also be y = 0, x + xGrew = 500 
                     grid[y][x] = 'o';
                     unitsOfSand++;
                     falling = false;
