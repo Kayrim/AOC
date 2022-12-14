@@ -1,7 +1,7 @@
 // https://adventofcode.com/2022/day/14
 import fs from 'fs'
-let text = fs.readFileSync('14\\test.txt', 'utf8').trim()
-// let text = fs.readFileSync('14\\input.txt', 'utf8').trim();
+// let text = fs.readFileSync('14\\test.txt', 'utf8').trim()
+let text = fs.readFileSync('14\\input.txt', 'utf8').trim();
 let lines = text.split('\r\n').map(y => y.split(' -> ').map(x => x.split(',').map(x => parseInt(x))));
 
 // find max and min
@@ -16,18 +16,30 @@ function createGrid (maxWidth, maxHeight) {
   return grid
 }
 
-let grid = createGrid(maxX - minX + 1, maxY + 1)
+let grid = createGrid(maxX - minX + 1, maxY + 3)
 grid[0][500 - minX] = '+'
 drawRocks(grid, lines)
 printGrid(grid, 500 - minX, 0)
+addFloor(grid)
 let unitsOfSand = 0;
 let playSand = true;
+let xFactor = minX;
 while(playSand){
-    playSand = animateSand(grid, 500 - minX, 0);
-    printGrid(grid, 500 - minX, 0)
+    animateSand(500 - xFactor, 0, true);
 }
-
-console.log(unitsOfSand)
+console.log("Part 1", unitsOfSand)
+// reset for part 2
+grid = createGrid(maxX - minX + 1, maxY + 3)
+grid[0][500 - minX] = '+'
+drawRocks(grid, lines)
+addFloor(grid)
+unitsOfSand = 0;
+playSand = true;
+xFactor = minX;
+while(playSand){
+    animateSand(500 - xFactor,0, false);
+}
+console.log("Part 2", unitsOfSand)
 
 function printGrid (grid, x, y) {
     // copy the grid
@@ -49,6 +61,12 @@ function drawRocks (grid, rocks) {
     })
 }
 
+function addFloor(grid){
+    let floor = Array(grid[0].length).fill('#');
+    // replace the last row with the floor
+    grid[grid.length - 1] = floor;
+}
+
 function drawLine (grid, x1, y1, x2, y2) {
     // if the line is vertical
     if(x1 === x2){
@@ -64,15 +82,35 @@ function drawLine (grid, x1, y1, x2, y2) {
     }
 }
 
-function animateSand(grid, x, y){
+function increaseGridX(grid){
+    let newGrid = createGrid(grid[0].length + 4, grid.length);
+    for(let y = 0; y < grid.length; y++){
+        for(let x = 0; x < grid[0].length; x++){
+            newGrid[y][x+2] = grid[y][x];
+        }
+    }
+    addFloor(newGrid);
+    xFactor -= 2;
+    return newGrid;
+}
+
+function animateSand(x, y, part1 = false){
     // calculate where the sand will fall
     let falling = true;
-    let stillInBounds = true;
-    while(falling && stillInBounds){
-        if(y === grid.length - 1 || x < 0 || x >= grid[0].length){
-            stillInBounds = false;
+    while(falling){
+        // printGrid(grid, x, y);
+        if(y === grid.length - 1 ){
+            playSand = false;
             falling = false;
-        }else if(grid[y+1][x] === '.'){
+        }else if (x - 1 < 0 || x + 1 >= grid[0].length) {
+            if(part1){
+                falling = false;
+                playSand = false;
+            }
+            // printGrid(grid, x, y)
+            grid = increaseGridX(grid)
+            x += 2
+        } else if(grid[y+1][x] === '.'){
             y++;
         }else if(grid[y+1][x] === '#' || grid[y+1][x] === 'o'){
             let below = grid[y+1][x];
@@ -80,31 +118,26 @@ function animateSand(grid, x, y){
             let bottomRight = grid[y+1][x+1];
 
             if(!isSolid(bottomLeft) && isSolid(below) ){
-                let newX = x - 1
-                if(animateSand(grid, newX, y) === false){                   
-                    falling = false;
-                    stillInBounds = false;
-                }
+                x -= 1;
             }else if(!isSolid(bottomRight) && isSolid(below) && isSolid(bottomLeft)){
-                let newX = x + 1
-                if(animateSand(grid, newX, y) === false){
-                    falling = false;
-                    stillInBounds = false;
-                }
+                x += 1;
             }else if(isSolid(bottomLeft) && isSolid(bottomRight) && isSolid(below)){
                 // place the sand
-                grid[y][x] = 'o';
-                unitsOfSand++;
-                falling = false;
-            }                        
+                if(grid[y][x] === '+'){
+                    grid[y][x] = 'o';
+                    unitsOfSand++;
+                    falling = false;
+                    playSand = false;
+                }else{
+                    grid[y][x] = 'o';
+                    unitsOfSand++;
+                    falling = false;
+                }
+            }
         }
-    }
-
-    return stillInBounds;  
+    } 
 }
 
 function isSolid(a){
     return a === '#' || a === 'o';
 }
-
-
